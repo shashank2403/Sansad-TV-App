@@ -34,6 +34,8 @@ class _NoticeScreenState extends State<ExploreScreen> {
     menuElement = document.getElementById('menu-main-menu') as html.Element;
     fetchNavItems(menuElement);
     cleanNavItems();
+    navigationStack[0][0].children.add(navigationStack[0][4]);
+    navigationStack[0].removeLast();
   }
 
   void cleanNavItems() {
@@ -195,7 +197,7 @@ class _NoticeScreenState extends State<ExploreScreen> {
                                                     ),
                                                     Expanded(
                                                       child: Text(
-                                                        navigationStack[pageIndex][itemIndex].label,
+                                                        navigationStack[pageIndex][itemIndex].label != 'More' ? navigationStack[pageIndex][itemIndex].label : 'Special Corner',
                                                         style: const TextStyle(
                                                           fontSize: 20,
                                                         ),
@@ -216,7 +218,7 @@ class _NoticeScreenState extends State<ExploreScreen> {
                                   ),
                                   pageIndex == 0
                                       ? const SizedBox(
-                                          height: 27.0,
+                                          height: 10.0,
                                         )
                                       : Container(),
                                   pageIndex == 0
@@ -255,7 +257,7 @@ class _NoticeScreenState extends State<ExploreScreen> {
                                                       ),
                                                       child: Row(
                                                         children: [
-                                                          staticPages[index][2] ?? Container(),
+                                                          staticPages[index][2] ?? const Placeholder(),
                                                           const SizedBox(
                                                             width: 13.0,
                                                           ),

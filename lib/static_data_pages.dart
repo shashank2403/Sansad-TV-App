@@ -292,7 +292,7 @@ class ContactScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 30.0,
+                      height: 18.0,
                     ),
                     Container(
                       padding: const EdgeInsets.all(15.0),

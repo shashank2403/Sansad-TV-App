@@ -70,8 +70,7 @@ const Map<String, Widget> exploreItems = {
   "Shows": Icon(Icons.tv_rounded),
   "Archive": Icon(Icons.archive_outlined),
   "Parliament": Icon(Icons.living_outlined),
-  "More": Icon(Icons.more_horiz_outlined),
-  "Swasth Bharat Samarth Bharat": Icon(Icons.stream_outlined),
+  "More": Icon(Icons.star_rounded),
 };
 
 const List<List<dynamic>> staticPages = [

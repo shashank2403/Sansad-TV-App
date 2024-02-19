@@ -55,6 +55,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 child: Center(
                   child: Image.asset(
                     "images/logo-sansad.png",
+                    height: 120.0,
                   ),
                 ),
               ),
@@ -63,7 +64,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 "Welcome to",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 24.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   shadows: [
                     Shadow(
@@ -81,7 +82,7 @@ class _RecentScreenState extends State<RecentScreen> {
                 "Sansad TV!",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 50.0,
+                  fontSize: 35.0,
                   fontWeight: FontWeight.bold,
                   shadows: [
                     Shadow(

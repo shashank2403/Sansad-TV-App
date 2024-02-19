@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:sansadtv_app/constants.dart';
 import 'package:sansadtv_app/explore_screen.dart';
+import 'package:sansadtv_app/notice_screen.dart';
 import 'package:sansadtv_app/offline_screen.dart';
 import 'package:sansadtv_app/recent_screen.dart';
 import 'package:sansadtv_app/search_screen.dart';
@@ -23,6 +24,7 @@ class _STVHomeScreenState extends State<STVHomeScreen> {
   List<Widget> pages = [
     const RecentScreen(),
     const SearchScreen(),
+    const NoticeScreen(),
   ];
 
   @override
@@ -72,6 +74,10 @@ class _STVHomeScreenState extends State<STVHomeScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.newspaper_rounded),
+                  label: 'Notices',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.public),
                   label: 'Explore',
                 ),
               ],
