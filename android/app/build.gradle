@@ -30,7 +30,7 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    namespace "com.example.stv_app"
+    namespace "in.nic.sansadtv"
     compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
