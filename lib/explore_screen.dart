@@ -257,7 +257,7 @@ class _NoticeScreenState extends State<ExploreScreen> {
                                                       ),
                                                       child: Row(
                                                         children: [
-                                                          staticPages[index][2] ?? const Placeholder(),
+                                                          staticPages[index][2] ?? Container(),
                                                           const SizedBox(
                                                             width: 13.0,
                                                           ),

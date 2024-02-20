@@ -37,6 +37,8 @@ class _NoticeScreenState extends State<NoticeScreen> {
       data.add(element.querySelector("td")?.nextElementSibling?.innerText as String);
       notices.add(data);
     });
+    setState(() {});
+    // print("notices" + notices.length.toString());
   }
 
   @override

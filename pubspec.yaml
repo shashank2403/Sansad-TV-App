@@ -42,6 +42,6 @@ flutter_launcher_icons:
   remove_alpha_ios: true
   ios: true
   adaptive_icon_background: "#942B72"
-  adaptive_icon_foreground: "images/logo-sansad.png"
-  image_path: "images/logo-sansad.png"
-  image_path_ios: "images/logo-sansad.png"
+  adaptive_icon_foreground: "images/launcher_icon.png"
+  image_path: "images/launcher_icon.png"
+  image_path_ios: "images/launcher_icon.png"

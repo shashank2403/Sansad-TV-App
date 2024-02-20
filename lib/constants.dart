@@ -71,6 +71,7 @@ const Map<String, Widget> exploreItems = {
   "Archive": Icon(Icons.archive_outlined),
   "Parliament": Icon(Icons.living_outlined),
   "More": Icon(Icons.star_rounded),
+  "Swasth Bharat Samarth Bharat": SizedBox(),
 };
 
 const List<List<dynamic>> staticPages = [
