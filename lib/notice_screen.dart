@@ -23,13 +23,11 @@ class _NoticeScreenState extends State<NoticeScreen> {
 
   void fetchNotices() async {
     final html.HtmlDocument document = await fetchHTML(noticeUrl);
-    print("got ");
     extractData(document);
   }
 
   void extractData(html.HtmlDocument doc) {
     var rows = doc.querySelectorAll("tr");
-    print(rows.length);
     rows.skip(1).forEach((element) {
       List<String> data = [];
       data.add(element.querySelector("p")?.innerText as String);
