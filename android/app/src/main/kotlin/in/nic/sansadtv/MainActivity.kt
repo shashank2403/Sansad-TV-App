@@ -1,4 +1,4 @@
-package com.nic.sansadtv
+package `in`.nic.sansadtv
 
 import io.flutter.embedding.android.FlutterActivity
 

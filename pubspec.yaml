@@ -1,7 +1,7 @@
 name: sansadtv_app
 description: "Sansad TV Mobile application"
 publish_to: 'none'
-version: 0.1.0
+version: 0.1.1+2
 
 environment:
   sdk: '>=3.2.6 <4.0.0'
