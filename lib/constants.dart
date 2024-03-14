@@ -5,8 +5,7 @@ import 'package:sansadtv_app/static_data_pages.dart';
 
 const String channelId = "UCISgnSNwqQ2i8lhCun3KtQg";
 
-// const String androidApiKey = "AIzaSyBGcz-o7cMT6C3K_iR77eyM_7Nxa3UBtzs";
-const String androidApiKey = "AIzaSyDzGn4DKuZil1Z2gNypaVyeOj8oi0VxqUw";
+const String androidApiKey = "AIzaSyBGcz-o7cMT6C3K_iR77eyM_7Nxa3UBtzs";
 const String iOSApiKey = "AIzaSyB1tFBrvY_Z2-gVC9WBtmhgHnmpl2kSGjk";
 
 String getApiKey() {
@@ -81,6 +80,11 @@ const List<List<dynamic>> staticPages = [
     Icon(Icons.info_outline),
   ],
   [
+    "Governing Council",
+    CouncilScreen(),
+    Icon(Icons.account_balance),
+  ],
+  [
     "Team Sansad TV",
     TeamScreen(),
     Icon(Icons.groups_2),
@@ -126,6 +130,44 @@ const List<List<String>> teamDetails = [
     "Director, Sansad TV",
     "011-23445707",
     "ajay.mallick@sansad.nic.in",
+  ],
+];
+
+const List<List<String>> councilDetails = [
+  [
+    "Shri Jagdeep Dhankhar",
+    "Hon'ble Chairman, Rajya Sabha",
+    "Chairman",
+    "011-23016422, 23016344",
+    "vpindia@nic.in",
+  ],
+  [
+    "Shri Om Birla",
+    "Hon'ble Speaker, Lok Sabha",
+    "Co-Chairman",
+    "011-23014011, 23014022",
+    "speakerloksabha@sansad.nic.in",
+  ],
+  [
+    "Shri P.C. Mody",
+    "Secretary General, Rajya Sabha",
+    "Member",
+    "011-23083035, 23083036, 23083037",
+    "secygen.rs@sansad.nic.in",
+  ],
+  [
+    "Shri Utpal Kumar Singh",
+    "Secretary General, Lok Sabha",
+    "Member",
+    "011-23017465, 23034255",
+    "sg-loksabha@sansad.nic.in",
+  ],
+  [
+    "Shri. Rajit Punhani",
+    "CEO, Sansad TV",
+    "Member-Secretary",
+    "011-23083045, 23083046, 23083047",
+    "r.punhani@sansad.nic.in",
   ],
 ];
 

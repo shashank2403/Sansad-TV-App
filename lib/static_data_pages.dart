@@ -158,6 +158,73 @@ class TeamScreen extends StatelessWidget {
   }
 }
 
+class CouncilScreen extends StatelessWidget {
+  const CouncilScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Center(
+              child: Text(
+                "Governing Council",
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 8.0,
+                      offset: Offset(
+                        4.0,
+                        4.0,
+                      ),
+                      color: Colors.black54,
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              decoration: pageCardDecoration().copyWith(
+                color: const Color.fromRGBO(240, 239, 245, 1),
+              ),
+              padding: const EdgeInsets.symmetric(
+                vertical: 20.0,
+                horizontal: 16.0,
+              ),
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: councilDetails.length,
+                itemBuilder: ((context, index) {
+                  return CouncilCard(
+                      name: councilDetails[index][0],
+                      designation1: councilDetails[index][1],
+                      designation2: councilDetails[index][2],
+                      number: councilDetails[index][3],
+                      email: councilDetails[index][4]);
+                }),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class TeamCard extends StatelessWidget {
   const TeamCard({
     super.key,
@@ -202,6 +269,99 @@ class TeamCard extends StatelessWidget {
                 Center(
                   child: Text(
                     designation,
+                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const SizedBox(height: 40.0),
+                Row(
+                  children: [
+                    const Icon(Icons.phone),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          number,
+                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  children: [
+                    const Icon(Icons.mail),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          email,
+                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20.0),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CouncilCard extends StatelessWidget {
+  const CouncilCard({
+    super.key,
+    required this.name,
+    required this.designation1,
+    required this.designation2,
+    required this.number,
+    required this.email,
+  });
+
+  final String name, designation1, designation2, number, email;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 6.0,
+            )
+          ],
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.white,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 30.0),
+                Center(
+                  child: Text(
+                    name,
+                    style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Center(
+                  child: Text(
+                    designation1,
+                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Center(
+                  child: Text(
+                    designation2,
                     style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                 ),
