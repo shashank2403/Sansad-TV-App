@@ -24,10 +24,8 @@ class _RecentScreenState extends State<RecentScreen> {
   late List<String> videoThumbnailUrl = [];
   late List<String> videoTitle = [];
   late List<String> videoDate = [];
-  late List<String> livestreamID = [];
-  late List<String> livestreamThumbnailUrl = [];
   late List<String> livestreamTitle = [];
-  late List<String> livestreamDate = [];
+  late List<String> livestreamUrl = [];
   bool lsfetchStatus = false;
   bool videofetchStatus = true;
   var unescape = HtmlUnescape();
@@ -107,29 +105,26 @@ class _RecentScreenState extends State<RecentScreen> {
                     const SizedBox(
                       height: 30.0,
                     ),
-                    if (lsfetchStatus)
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 24.0),
-                        child: Text(
-                          'Live Now',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                          ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Text(
+                        'Live Now',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
                         ),
                       ),
-                    if (lsfetchStatus)
-                      SizedBox(
-                        height: 260,
-                        width: double.infinity,
-                        child: LivestreamCarousel(livestreamID: livestreamID, livestreamThumbnailUrl: livestreamThumbnailUrl, livestreamTitle: livestreamTitle),
-                      ),
-                    if (lsfetchStatus)
-                      const SizedBox(
-                        height: 16,
-                      ),
+                    ),
+                    SizedBox(
+                      height: 260,
+                      width: double.infinity,
+                      child: LivestreamCarousel(livestreamUrl: livestreamUrl, livestreamTitle: livestreamTitle),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     const Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 24.0,
@@ -203,33 +198,17 @@ class _RecentScreenState extends State<RecentScreen> {
   }
 
   Future<void> fetchLS() async {
-    const fields = 'items(id,snippet(title,thumbnails,publishedAt))';
-    String apiUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=$channelId&fields=$fields&maxResults=$livestreamLimit&eventType=live&type=video&order=date&key=${getApiKey()}';
     try {
-      var response = await http.get(Uri.parse(apiUrl));
-      if (response.statusCode != 200) {
-        throw Exception();
+      final lsResponse = await http.head(Uri.parse(lsLiveUrl));
+      if (lsResponse.statusCode == 200) {
+        livestreamTitle.add("Lok Sabha TV");
+        livestreamUrl.add(lsLiveUrl);
       }
-
-      List bodyItems = json.decode(response.body)['items'];
-      setState(
-        () {
-          if (bodyItems.isNotEmpty) lsfetchStatus = true;
-          for (var element in bodyItems) {
-            livestreamID.add(element['id']['videoId']);
-            livestreamTitle.add(unescape.convert(element['snippet']['title']));
-            livestreamDate.add(DateFormat.yMMMMd().format(DateTime.parse(element['snippet']['publishedAt'])));
-            Map<String, dynamic> thumbnails = element['snippet']['thumbnails'];
-            if (thumbnails.containsKey('high')) {
-              livestreamThumbnailUrl.add(thumbnails['high']['url']);
-            } else if (thumbnails.containsKey('medium')) {
-              livestreamThumbnailUrl.add(thumbnails['medium']['url']);
-            } else {
-              livestreamThumbnailUrl.add(thumbnails['default']['url']);
-            }
-          }
-        },
-      );
+      final rsResponse = await http.head(Uri.parse(rsLiveUrl));
+      if (rsResponse.statusCode == 200) {
+        livestreamTitle.add("Rajya Sabha TV");
+        livestreamUrl.add(rsLiveUrl);
+      }
     } catch (e) {
       if (kDebugMode) {
         print(e);

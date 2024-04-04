@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sansadtv_app/live_player_screen.dart';
 import 'package:sansadtv_app/player_screen.dart';
 
 class VideosList extends StatefulWidget {
@@ -72,13 +73,11 @@ class _VideosListState extends State<VideosList> {
 class LivestreamCarousel extends StatefulWidget {
   const LivestreamCarousel({
     super.key,
-    required this.livestreamID,
-    required this.livestreamThumbnailUrl,
+    required this.livestreamUrl,
     required this.livestreamTitle,
   });
 
-  final List<String> livestreamID;
-  final List<String> livestreamThumbnailUrl;
+  final List<String> livestreamUrl;
   final List<String> livestreamTitle;
 
   @override
@@ -114,21 +113,24 @@ class LivestreamCarouselState extends State<LivestreamCarousel> {
         Expanded(
           child: PageView.builder(
             controller: _pageController,
-            itemCount: widget.livestreamID.length,
+            itemCount: widget.livestreamTitle.length,
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PlayerScreen(videoID: widget.livestreamID[index]),
+                      builder: (context) => LivePlayerScreen(
+                        liveStreamTitle: widget.livestreamTitle[index],
+                        livestreamUrl: widget.livestreamUrl[index],
+                      ),
                     ),
                   );
                 },
-                child: VideoCard(
-                  videoID: widget.livestreamID[index],
-                  videoThumbnailUrl: widget.livestreamThumbnailUrl[index],
-                  videoTitle: widget.livestreamTitle[index],
+                child: LSCard(
+                  livestreamUrl: widget.livestreamUrl[index],
+                  livestreamThumbnailUrl: "https://i.ytimg.com/vi/eWmq2UtUXf0/hqdefault_live.jpg",
+                  livestreamTitle: widget.livestreamTitle[index],
                 ),
               );
             },
@@ -150,18 +152,22 @@ class LivestreamCarouselState extends State<LivestreamCarousel> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: widget.livestreamID.length,
+        itemCount: widget.livestreamTitle.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PlayerScreen(videoID: widget.livestreamID[index]),
+                  builder: (context) => LivePlayerScreen(
+                    liveStreamTitle: widget.livestreamUrl[index],
+                    livestreamUrl: widget.livestreamUrl[index],
+                  ),
                 ),
               );
             },
-            child: ScrollableVideoCard(videoID: widget.livestreamID[index], videoThumbnailUrl: widget.livestreamThumbnailUrl[index], videoTitle: widget.livestreamTitle[index]),
+            child: ScrollableLSCard(
+                livestreamUrl: widget.livestreamUrl[index], livestreamThumbnailUrl: "https://i.ytimg.com/vi/eWmq2UtUXf0/hqdefault_live.jpg", livestreamTitle: widget.livestreamTitle[index]),
           );
         },
       ),
@@ -172,7 +178,7 @@ class LivestreamCarouselState extends State<LivestreamCarousel> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
-        widget.livestreamID.length,
+        widget.livestreamTitle.length,
         (index) {
           return Container(
             width: 8,
@@ -184,6 +190,82 @@ class LivestreamCarouselState extends State<LivestreamCarousel> {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class ScrollableLSCard extends StatelessWidget {
+  const ScrollableLSCard({super.key, required this.livestreamUrl, required this.livestreamThumbnailUrl, required this.livestreamTitle});
+
+  final String livestreamUrl;
+  final String livestreamThumbnailUrl;
+  final String livestreamTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20),
+      child: Container(
+        width: 400,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(livestreamThumbnailUrl),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black,
+              blurRadius: 6.0,
+            )
+          ],
+        ),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              bottom: 0,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
+                  ),
+                  gradient: LinearGradient(
+                    begin: Alignment.center,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.7),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 8,
+              left: 12,
+              right: 17,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "$livestreamTitle | Live",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      height: 1.5,
+                    ),
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -378,6 +460,105 @@ class VideoCard extends StatelessWidget {
                               maxLines: 1,
                             )
                           : Container(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LSCard extends StatelessWidget {
+  const LSCard({
+    super.key,
+    required this.livestreamUrl,
+    required this.livestreamThumbnailUrl,
+    required this.livestreamTitle,
+  });
+
+  final String livestreamUrl;
+  final String livestreamThumbnailUrl;
+  final String livestreamTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LivePlayerScreen(
+              liveStreamTitle: livestreamTitle,
+              livestreamUrl: livestreamUrl,
+            ),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 3.0,
+          horizontal: 10.0,
+        ),
+        child: Card(
+          child: Container(
+            height: 220,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(livestreamThumbnailUrl),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 6.0,
+                )
+              ],
+            ),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  bottom: 0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
+                      gradient: LinearGradient(
+                        begin: Alignment.center,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withOpacity(0.7),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 8,
+                  left: 12,
+                  right: 17,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "$livestreamTitle | Live",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          height: 1.5,
+                        ),
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
                     ],
                   ),
                 ),

@@ -5,7 +5,7 @@ import 'package:sansadtv_app/static_data_pages.dart';
 
 const String channelId = "UCISgnSNwqQ2i8lhCun3KtQg";
 
-const String androidApiKey = "AIzaSyBGcz-o7cMT6C3K_iR77eyM_7Nxa3UBtzs";
+const String androidApiKey = "AIzaSyDzGn4DKuZil1Z2gNypaVyeOj8oi0VxqUw";
 const String iOSApiKey = "AIzaSyB1tFBrvY_Z2-gVC9WBtmhgHnmpl2kSGjk";
 
 String getApiKey() {
@@ -28,6 +28,8 @@ const String xUrl = "http://twitter.com/sansad_tv";
 const String ytUrl = "https://www.youtube.com/c/sansadtv";
 const String noticeUrl = "https://sansadtv.nic.in/notices";
 
+const String lsLiveUrl = "https://hls.media.nic.in/hls/live/lstv/lstv.m3u8";
+const String rsLiveUrl = "https://hls.media.nic.in/hls/live/rstv/rstv.m3u8";
 const String certificate = '''-----BEGIN CERTIFICATE-----
 MIIGLjCCBRagAwIBAgIQCLJ48FI6XOq6u63YgGQaUTANBgkqhkiG9w0BAQsFADBg
 MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3
